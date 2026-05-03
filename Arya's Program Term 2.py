@@ -17,7 +17,7 @@ def order_menu():
                 print("Pickup is free and should be ready in 5-10 minites")
                 return return_order[0], order_type[0][1]
             elif choice_order_type == 2:
-                print("Delivery is $3.49 , Orders talke 5-10 minites after order") 
+                print("\nDelivery is $3.49 , Orders take 5-10 minutes after order") 
                 return return_order[1], order_type[1][1]
             else: # else/ except only prints invalid if input is not expected 
                 print("Invalid choice Please enter a number between 1 or 2")    
