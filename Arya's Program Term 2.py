@@ -28,14 +28,13 @@ def order_menu():
             print("Delivery is $3.49 , Orders talke 5-10 minites after order")
     return return_order[choice_order_type - 1]
 
-
 def size_menu():
     print("\n--- Drink Size ---")
     
     drink_size = [
-    "1. Small - $5.00",
-    "2. Medium- $6.50",
-    "3. Large- $7.50",
+        ["Small", 5.00],
+        ["Medium", 6.50],
+        ["Large", 7.50]
   
     ]
     return_sizes = ["Small", "Medium", "Large"]
@@ -44,13 +43,13 @@ def size_menu():
     while True: 
         try:
             drink_choice = int(input("Enter your Drink Size: ")) 
-            if drink_choice in [1, 2, 3]:   
-                break 
+            if 1 <= drink_choice <= 3:   
+                return return_sizes[drink_choice - 1], drink_size[drink_choice - 1][1]
+             
             else:
                 print("Invalid choice Please enter a number between 1 and 3")    
         except ValueError:
             print("Invalid input Please enter a valid number")  
-    return return_sizes[drink_choice - 1]
 
 
 def drink_menu():
@@ -73,14 +72,12 @@ def drink_menu():
                 elif drink_type_choice == 3:
                     selected_drink =  cream_menu() 
        
-                break
+                return selected_drink
             else:
                 print("Invalid choice Please enter a number between 1 and 3")  
         except ValueError:
             print("Invalid input Please enter a valid number")
-    return selected_drink 
-
-
+    
 
 def caffeinated_menu():
     print("\n--- Caffeinated Drinks Menu ---")
@@ -99,14 +96,13 @@ def caffeinated_menu():
         try:
             caffeinated_choice = int(input("Select your drink: "))
             if 1 <= caffeinated_choice <= 5:
-                print(f"Adding drink {caffeinated_choice} to your order.")
-                break
+                print(f"Adding drink {return_caff[caffeinated_choice - 1]} to your order.")
+                return return_caff[caffeinated_choice - 1]
             else:
                 print("Please choose a number between 1 and 5.")
         except ValueError:
             print("Invalid input. Please enter a number.")
-    return return_caff[caffeinated_choice - 1]
-
+    
 
 def Fruit_menu():
     print("\n--- Fruit Refreshers Drinks Menu ---")
@@ -124,13 +120,13 @@ def Fruit_menu():
         try:
             fruit_choice = int(input("Select your drink: "))
             if 1 <= fruit_choice <= 5:
-                print(f"Adding drink {fruit_choice} to your order.")
-                break
+                print(f"Adding drink {return_fruit[fruit_choice - 1]} to your order.")
+                return return_fruit[fruit_choice - 1]
             else:
                 print("Please choose a number between 1 and 5.")
         except ValueError:
             print("Invalid input. Please enter a number.")
-    return return_fruit[fruit_choice - 1]
+    
 
 def cream_menu():
     print("\n--- Cream-based Drinks Menu ---")
@@ -148,48 +144,67 @@ def cream_menu():
         try:
             cream_choice = int(input("Select your drink: "))
             if 1 <= cream_choice <= 5:
-                print(f"Adding drink {cream_choice} to your order.")
-                break
+                print(f"Adding drink {return_cream[cream_choice - 1]} to your order.")
+                return return_cream[cream_choice - 1]
             else:
                 print("Please choose a number between 1 and 4.")
         except ValueError:
             print("Invalid input. Please enter a number.")
-        return return_cream[cream_choice - 1]
 
 
 def toppings_menu():
     print("\n--- Toppings Drinks Menu ---")
     toppings = [
-        "1. Whipped Cream",
-        "2. Chocolate Drizzle ",
-        "3. Caramel Drizzle",
-        "4. Oreo's",
-        "5. Sprinkles"
+        ["Whipped Cream", 1.00],
+        ["Chocolate Drizzle", 0.50],
+        ["Caramel Drizzle", 0.50],
+        ["Oreo's", 1.50],
+        ["Sprinkles", 0.50]
     ]
     return_toppings = ["Whipped Cream", "Chocolate Drizzle", "Caramel Drizzle", "Oreo's", "Sprinkles"]
+    count = 1 
     for top in toppings:
-        print(top)
+        print(f"{count}. {top[0]} - ${top[1]:.2f}")
+        count += 1
+       
     while True:
         try:
             toppings_choice = int(input("Select Your toppings:"))
             if 1 <= toppings_choice <= 5:
                 print(f"Adding {return_toppings[toppings_choice - 1]} to your Drink")
-                break
+                return return_toppings[toppings_choice - 1], toppings[toppings_choice - 1][1]
+
             else:
                 print("Please choose a number between 1 and 5.")
         except ValueError:
             print("Invalid input. Please enter a number.")
-    
-    return return_toppings[toppings_choice - 1]
-
+        
 
 def main():
     order_type = order_menu()
-    size_choice = size_menu()
+    size_choice, size_price = size_menu() 
     drink_choice = drink_menu()
-    topping_choice = toppings_menu()
-    print(f"\nYour Order: {size_choice} {drink_choice} with {topping_choice}")
-    print(f"Service: {order_type}")
+    topping_choice, topping_price = toppings_menu()
+    total = size_price + topping_price
+    print("\n--- RECEIPT  ---")
+    print("--------------------")
+    print("\nYour Order;")
+    print(f"\nService: {order_type}")
+    print(f"\nSize:{size_choice} ")
+    print(f"\nDrink:{drink_choice} ")
+    print(f"\nToppings:{topping_choice} ")
+    print("--------------------")
+    print("\n--- PRICE --- ")
+    print(f"\n {size_choice}: {size_price}  ")
+    print(f"\n {topping_choice}: {topping_price}  ")
+    print(f"\nTotal Price: ${total:.2f}") 
+    print("-------------------------")
+    
+
+
+
+
+  
 
 
 main()
