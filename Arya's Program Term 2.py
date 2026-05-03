@@ -1,4 +1,5 @@
 def order_menu():
+    #executes order_menu - loops through the options and stores the price and name to the function 
     print("\n --- Order Type ---")
     order_type = [
         ["Pickup", 0.00],
@@ -18,7 +19,7 @@ def order_menu():
             elif choice_order_type == 2:
                 print("Delivery is $3.49 , Orders talke 5-10 minites after order") 
                 return return_order[1], order_type[1][1]
-            else:
+            else: # else/ except only prints invalid if input is not expected 
                 print("Invalid choice Please enter a number between 1 or 2")    
         except ValueError:
             print("Invalid input Please enter a valid number")
@@ -26,6 +27,7 @@ def order_menu():
 
 
 def size_menu():
+    #executes size_menu - loops through the options and stores the price and name to the function 
     print("\n--- Drink Size ---")
     
     drink_size = [
@@ -45,13 +47,14 @@ def size_menu():
             if 1 <= drink_choice <= 3:   
                 return return_sizes[drink_choice - 1], drink_size[drink_choice - 1][1]
              
-            else:
+            else:# else/ except only prints invalid if input is not expected 
                 print("Invalid choice Please enter a number between 1 and 3")    
         except ValueError:
             print("Invalid input Please enter a valid number")  
 
 
 def drink_menu():
+    #executes drink_menu - loops through the options and prints the function entred by the user 
     print("\n--- Drinks Type ---")
     drink_type = [
     "1. Caffeinated Drinks",
@@ -72,13 +75,14 @@ def drink_menu():
                     selected_drink =  cream_menu() 
        
                 return selected_drink
-            else:
+            else:# else/ except only prints invalid if input is not expected 
                 print("Invalid choice Please enter a number between 1 and 3")  
         except ValueError:
             print("Invalid input Please enter a valid number")
     
 
 def caffeinated_menu():
+    #executes caffeinated_menu - prints all the drinks along with returning the user input to the function
     print("\n--- Caffeinated Drinks Menu ---")
     caff_drinks = [
         "1. Espresso",
@@ -97,13 +101,14 @@ def caffeinated_menu():
             if 1 <= caffeinated_choice <= 5:
                 print(f"Adding drink {return_caff[caffeinated_choice - 1]} to your order.")
                 return return_caff[caffeinated_choice - 1]
-            else:
+            else:# else/ except only prints invalid if input is not expected 
                 print("Please choose a number between 1 and 5.")
         except ValueError:
             print("Invalid input. Please enter a number.")
     
 
 def Fruit_menu():
+    #executes Fruit_menu - prints all the drinks along with returning the user input to the function
     print("\n--- Fruit Refreshers Drinks Menu ---")
     fruit_drinks = [
         "1. Strawberry Refreshers",
@@ -121,13 +126,15 @@ def Fruit_menu():
             if 1 <= fruit_choice <= 5:
                 print(f"Adding drink {return_fruit[fruit_choice - 1]} to your order.")
                 return return_fruit[fruit_choice - 1]
-            else:
+            else:# else/ except only prints invalid if input is not expected 
                 print("Please choose a number between 1 and 5.")
         except ValueError:
             print("Invalid input. Please enter a number.")
     
 
 def cream_menu():
+    #executes cream_menu - prints all the drinks along with returning the user input to the function
+    
     print("\n--- Cream-based Drinks Menu ---")
     cream_drinks = [
         "1. Strawberry Frappuccino",
@@ -145,13 +152,14 @@ def cream_menu():
             if 1 <= cream_choice <= 5:
                 print(f"Adding drink {return_cream[cream_choice - 1]} to your order.")
                 return return_cream[cream_choice - 1]
-            else:
+            else:# else/ except only prints invalid if input is not expected 
                 print("Please choose a number between 1 and 4.")
         except ValueError:
             print("Invalid input. Please enter a number.")
 
 
 def toppings_menu():
+    #executes toppings_menu - prints all the toppings with their prices along with returning the user input to the function
     print("\n--- Toppings Drinks Menu ---")
     toppings = [
         ["Whipped Cream", 1.00],
@@ -173,28 +181,31 @@ def toppings_menu():
                 print(f"Adding {return_toppings[toppings_choice - 1]} to your Drink")
                 return return_toppings[toppings_choice - 1], toppings[toppings_choice - 1][1]
 
-            else:
+            else:# else/ except only prints invalid if input is not expected 
                 print("Please choose a number between 1 and 5.")
         except ValueError:
             print("Invalid input. Please enter a number.")
         
 
 def main():
+
     print("\n--- Welcome to Dash'n Drinks ---")
     order_type, delivery_fee = order_menu()
     size_choice, size_price = size_menu() 
     drink_choice = drink_menu()
     topping_choice, topping_price = toppings_menu()
     total = size_price + topping_price + delivery_fee
+    # Prints a clear receipt of all the user inputs thought the program
     print("\n--- Dash'n Drinks  ---")
     print("\n--- RECEIPT  ---")
     print("--------------------")
-    print("\nYour Order;")
+    print("\nYour Order:")
     print(f"\nService: {order_type}")
-    print(f"\nSize:{size_choice} ")
-    print(f"\nDrink:{drink_choice} ")
-    print(f"\nToppings:{topping_choice} ")
+    print(f"\nSize: {size_choice} ")
+    print(f"\nDrink: {drink_choice} ")
+    print(f"\nToppings: {topping_choice} ")
     print("--------------------")
+    # Calculates the price and prints a clear breakdown of the total price 
     print("\n--- PRICE --- ")
     print(f"\n {order_type}: ${delivery_fee:.2f} ")
     print(f"\n {size_choice}: ${size_price:.2f}  ")
