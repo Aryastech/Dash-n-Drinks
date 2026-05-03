@@ -1,32 +1,29 @@
-def menu():
-    print("\n--- Welcome to Dash Drink ---")
-    order_menu()
-
-
 def order_menu():
     print("\n --- Order Type ---")
     order_type = [
-    "1. Pickup",
-    "2. Delivery"
-
-    ]
+        ["Pickup", 0.00],
+        ["Delivery", 3.49]
+]
     return_order = ["Pickup", "Delivery"]
+    count = 1
     for order in order_type:
-        print(order) 
+        print(f"{count}. {order[0]}")
+        count += 1
     while True:
         try:
             choice_order_type = int(input("\nEnter your option:")) 
-            if choice_order_type in [1, 2]:   
-                break 
+            if choice_order_type == 1:
+                print("Pickup is free and should be ready in 5-10 minites")
+                return return_order[0], order_type[0][1]
+            elif choice_order_type == 2:
+                print("Delivery is $3.49 , Orders talke 5-10 minites after order") 
+                return return_order[1], order_type[1][1]
             else:
                 print("Invalid choice Please enter a number between 1 or 2")    
         except ValueError:
             print("Invalid input Please enter a valid number")
-    if choice_order_type == 1:
-            print("Pickup is free and should be ready in 5-10 minites")
-    elif choice_order_type == 2: 
-            print("Delivery is $3.49 , Orders talke 5-10 minites after order")
-    return return_order[choice_order_type - 1]
+
+
 
 def size_menu():
     print("\n--- Drink Size ---")
@@ -38,8 +35,10 @@ def size_menu():
   
     ]
     return_sizes = ["Small", "Medium", "Large"]
+    count = 1
     for drink in drink_size:
-        print(drink)
+        print(f"{count}. {drink[0]} - ${drink[1]:.2f}")
+        count += 1
     while True: 
         try:
             drink_choice = int(input("Enter your Drink Size: ")) 
@@ -181,11 +180,13 @@ def toppings_menu():
         
 
 def main():
-    order_type = order_menu()
+    print("\n--- Welcome to Dash'n Drinks ---")
+    order_type, delivery_fee = order_menu()
     size_choice, size_price = size_menu() 
     drink_choice = drink_menu()
     topping_choice, topping_price = toppings_menu()
-    total = size_price + topping_price
+    total = size_price + topping_price + delivery_fee
+    print("\n--- Dash'n Drinks  ---")
     print("\n--- RECEIPT  ---")
     print("--------------------")
     print("\nYour Order;")
@@ -195,8 +196,10 @@ def main():
     print(f"\nToppings:{topping_choice} ")
     print("--------------------")
     print("\n--- PRICE --- ")
-    print(f"\n {size_choice}: {size_price}  ")
-    print(f"\n {topping_choice}: {topping_price}  ")
+    print(f"\n {order_type}: ${delivery_fee:.2f} ")
+    print(f"\n {size_choice}: ${size_price:.2f}  ")
+    print(f"\n {topping_choice}: ${topping_price:.2f}  ")
+
     print(f"\nTotal Price: ${total:.2f}") 
     print("-------------------------")
     
